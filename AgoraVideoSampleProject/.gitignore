@@ -10,8 +10,18 @@ Assets/*
 !Assets/AgoraEngine.meta
 Assets/AgoraEngine/*
 
-!Assets/AgoraEngine/AgoraEngine.asmdef
-!Assets/AgoraEngine/AgoraEngine.asmdef.meta
+!Assets/AgoraEngine/Scripts
+!Assets/AgoraEngine/Scripts.meta
+Assets/AgoraEngine/Scripts/*
+
+!Assets/AgoraEngine/Editor
+!Assets/AgoraEngine/Editor.meta
+Assets/AgoraEngine/Editor/*
+
+!Assets/AgoraEngine/Scripts/AgoraEngine.asmdef
+!Assets/AgoraEngine/Scripts/AgoraEngine.asmdef.meta
+!Assets/AgoraEngine/Editor/AgoraEngine.Editor.asmdef
+!Assets/AgoraEngine/Editor/AgoraEngine.Editor.asmdef.meta
 
 !Assets/ThirdParty
 !Assets/ThirdParty.meta
