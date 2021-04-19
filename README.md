@@ -14,8 +14,8 @@
   Licensed under the MIT License. Copyright (c) 2019 Yoshifumi Kawai / Cysharp, Inc.
 
 ## License
-- [Agora Extension for Unity]()  
+- [Agora Extension for Unity](https://github.com/sotanmochi/AgoraVideoSamples-Unity/tree/main/AgoraExtension)  
   Licensed under the MIT License. Copyright (c) 2021 Soichiro Sugimoto
 
-- [Agora Extension Samples for Unity]()  
+- [Agora Extension Samples for Unity](https://github.com/sotanmochi/AgoraVideoSamples-Unity/tree/main/AgoraVideoSampleProject)  
   Licensed under CC0 (Public Domain).
