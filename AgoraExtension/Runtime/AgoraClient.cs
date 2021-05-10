@@ -87,9 +87,10 @@ namespace AgoraExtension
             _RtcEngine.SetClientRole(joinParameters.ClientRoleType);
 
             // Audio
-            _RtcEngine.DisableAudio();
-            _RtcEngine.MuteLocalAudioStream(true);
-            _RtcEngine.EnableLocalAudio(false);
+            // _RtcEngine.DisableAudio();
+            // _RtcEngine.MuteLocalAudioStream(true);
+            // _RtcEngine.EnableLocalAudio(false);
+            _RtcEngine.SetEnableSpeakerphone(true);
 
             // Video
             var config = new VideoEncoderConfiguration()
@@ -109,10 +110,6 @@ namespace AgoraExtension
 
             // Join channel
             _RtcEngine.JoinChannel(joinParameters.ChannelName);
-            _RtcEngine.OnJoinChannelSuccess += (channelName, userId, elapsedTimeMilliSeconds) => 
-            {
-                _IsJoined = true;
-            };
             await UniTask.WaitUntil(() => _IsJoined).TimeoutWithoutException(TimeSpan.FromSeconds(timeoutSeconds));
 
             return _IsJoined;
@@ -164,6 +161,8 @@ namespace AgoraExtension
 
         private void OnJoinChannelSuccess(string channelName, uint userId, int elapsed)
         {
+            _IsJoined = true;
+            _RtcEngine.SetAudioSessionOperationRestriction(AUDIO_SESSION_OPERATION_RESTRICTION.AUDIO_SESSION_OPERATION_RESTRICTION_ALL);
             _OnJoinedChannel.OnNext(userId);
         }
 
