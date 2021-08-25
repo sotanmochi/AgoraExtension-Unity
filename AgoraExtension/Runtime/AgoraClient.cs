@@ -138,7 +138,7 @@ namespace AgoraExtension
         {
             UnloadEngine();
 
-            _RtcEngine = IRtcEngine.GetEngine(new RtcEngineConfig(appId, areaCode));
+            _RtcEngine = IRtcEngine.GetEngine(new RtcEngineConfig(appId, new LogConfig(), areaCode));
             if (_RtcEngine == null)
             {
                 return false;
