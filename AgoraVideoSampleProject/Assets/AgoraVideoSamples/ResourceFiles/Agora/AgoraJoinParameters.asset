@@ -18,3 +18,5 @@ MonoBehaviour:
   FrameRate: 15
   ClientRoleType: 2
   ChannelProfile: 0
+  AudioChannels: 1
+  SampleRate: 48000

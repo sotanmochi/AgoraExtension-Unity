@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.IO;
 using UnityEngine;
 using UniRx;
 using Cysharp.Threading.Tasks;
@@ -87,6 +88,7 @@ namespace AgoraExtension
             _RtcEngine.SetClientRole(joinParameters.ClientRoleType);
 
             // Audio
+            _RtcEngine.SetExternalAudioSource(true, joinParameters.SampleRate, joinParameters.AudioChannels);
             // _RtcEngine.DisableAudio();
             // _RtcEngine.MuteLocalAudioStream(true);
             // _RtcEngine.EnableLocalAudio(false);
@@ -132,6 +134,39 @@ namespace AgoraExtension
         public void PushVideoFrame(ExternalVideoFrame externalVideoFrame)
         {
             _RtcEngine.PushVideoFrame(externalVideoFrame);            
+        }
+
+        public void PushAudioFrame(AudioFrame audioFrame)
+        {
+            _RtcEngine.PushAudioFrame(audioFrame);
+        }
+
+        private static readonly DateTime Jan1st1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+        public void PushAudioFrame(float[] pcm, int channels = 1, int samplingRate = 48000)
+        {
+            long currentTimeMillis = (long)(DateTime.UtcNow - Jan1st1970).TotalMilliseconds;
+
+            // Convert 32bit float PCM to 16bit PCM data bytes.
+            var dataStream = new MemoryStream();
+            for (int i = 0; i < pcm.Length; i++)
+            {
+                dataStream.Write(BitConverter.GetBytes(Convert.ToInt16(pcm[i] * Int16.MaxValue)), 0, sizeof(Int16));
+            }
+            var buffer = dataStream.ToArray();
+
+            var audioFrame = new AudioFrame()
+            {
+                type = AUDIO_FRAME_TYPE.FRAME_TYPE_PCM16,
+                bytesPerSample = 2, // PCM16
+                buffer = buffer,
+                channels = channels,
+                samples = pcm.Length / channels,
+                samplesPerSec = samplingRate,
+                renderTimeMs = currentTimeMillis,
+            };
+
+            _RtcEngine.PushAudioFrame(audioFrame);
         }
 
         private bool LoadEngine(string appId, AREA_CODE areaCode)
