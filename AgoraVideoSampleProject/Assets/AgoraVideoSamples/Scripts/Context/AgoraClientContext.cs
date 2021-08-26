@@ -11,6 +11,8 @@ namespace AgoraExtension.Samples
         [SerializeField] AgoraJoinParameters _JoinParameters;
         [SerializeField] AgoraClient _Client;
 
+        public bool IsJoined => _Client.IsJoined;
+
         public IObservable<uint> OnJoinedAsObservable() => _Client.OnJoinedChannelAsObservable();
         public IObservable<Unit> OnLeftAsObservable() => _Client.OnLeftChannelAsObservable();
 
@@ -57,6 +59,11 @@ namespace AgoraExtension.Samples
         {
             _JoinParameters.VideoWidth = width;
             _JoinParameters.VideoHeight = height;
+        }
+
+        public void SendAudioFrame(float[] frameData)
+        {
+            _Client.PushAudioFrame(frameData);
         }
     }
 }
