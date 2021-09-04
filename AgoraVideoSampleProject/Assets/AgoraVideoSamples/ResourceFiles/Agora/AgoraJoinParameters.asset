@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: AgoraJoinParameters
   m_EditorClassIdentifier: 
   ChannelName: ChannelName
-  VideoWidth: 640
-  VideoHeight: 360
+  VideoWidth: 1920
+  VideoHeight: 960
   FrameRate: 15
   ClientRoleType: 2
   ChannelProfile: 0
-  AudioChannels: 1
+  AudioChannels: 2
   SampleRate: 48000

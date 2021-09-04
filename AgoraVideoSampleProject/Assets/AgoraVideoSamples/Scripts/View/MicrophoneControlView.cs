@@ -21,10 +21,7 @@ namespace AgoraExtension.Samples
         private string _dropdownMessage = "Select Microphone";
         
         private void Awake()
-        {
-            _dropdownItems = Microphone.devices;
-            InitializeSelectDropdown();
-            
+        {            
             _selectDropdown.OnValueChangedAsObservable()
             .Subscribe(selectedIndex => 
             {
@@ -41,13 +38,15 @@ namespace AgoraExtension.Samples
             .AddTo(this);
         }
         
-        private void InitializeSelectDropdown()
+        public void UpdateSelectDropdown(List<string> itemList)
         {
+            _dropdownItems = itemList.ToArray();
+
             _selectDropdown.ClearOptions();
             _selectDropdown.RefreshShownValue();
             _selectDropdown.options.Add(new Dropdown.OptionData { text = _dropdownMessage });
             
-            foreach(var item in _dropdownItems)
+            foreach(var item in itemList)
             {
                 _selectDropdown.options.Add(new Dropdown.OptionData { text = item });
             }

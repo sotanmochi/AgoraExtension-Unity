@@ -2,7 +2,7 @@
 using UnityEngine;
 using UniRx;
 
-namespace UtilityToolkit.Audio
+namespace AudioUtilityToolkit.UnityAudioExtension
 {
     public class UnityMicrophone : IDisposable
     {
@@ -37,15 +37,15 @@ namespace UtilityToolkit.Audio
             Stop();
         }
 
-        public bool Start(string deviceName = null, int tickRate = 30)
+        public bool Start(string deviceName = null, int updateRate = 30)
         {
             _currentDevice = deviceName;
 
             _audioClip = Microphone.Start(_currentDevice, true, _micLengthSec, _samplingFrequency);
             if (_audioClip is null) { return false; }
 
-            _disposable = Observable.Interval(TimeSpan.FromMilliseconds(1000.0f / tickRate))
-                                    .Subscribe(_ => Tick());
+            _disposable = Observable.Interval(TimeSpan.FromMilliseconds(1000.0f / updateRate))
+                                    .Subscribe(_ => Update());
             return true;
         }
 
@@ -55,7 +55,7 @@ namespace UtilityToolkit.Audio
             Microphone.End(_currentDevice);
         }
 
-        private void Tick()
+        private void Update()
         {
             var samplePosition = Microphone.GetPosition(_currentDevice);
             if (samplePosition < 0 || _headPosition == samplePosition)

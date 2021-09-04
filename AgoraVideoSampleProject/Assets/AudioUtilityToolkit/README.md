@@ -1,4 +1,4 @@
-# Utility Toolkit for Unity
+# Audio Utility Toolkit for Unity
 
 ## License
 このライブラリは、CC0 (Public Domain) でライセンスされています。

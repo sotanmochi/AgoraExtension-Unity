@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace UtilityToolkit.Audio
+namespace AudioUtilityToolkit
 {
     public static class PCMUtility
     {

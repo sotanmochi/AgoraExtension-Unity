@@ -40,8 +40,8 @@ Assets/ThirdParty/*
 # ================================================================ #
 !Assets/AgoraVideoSamples
 !Assets/AgoraVideoSamples.meta
-!Assets/UtilityToolkit
-!Assets/UtilityToolkit.meta
+!Assets/AudioUtilityToolkit
+!Assets/AudioUtilityToolkit.meta
 
 # ================================ #
 #  Config files should be ignored

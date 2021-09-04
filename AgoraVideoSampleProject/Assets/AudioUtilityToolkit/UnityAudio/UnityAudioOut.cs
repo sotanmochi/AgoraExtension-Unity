@@ -1,13 +1,13 @@
 using System;
 using UnityEngine;
 
-namespace UtilityToolkit.Audio
+namespace AudioUtilityToolkit.UnityAudioExtension
 {
     [RequireComponent(typeof(AudioSource))]
     public class UnityAudioOut : MonoBehaviour
     {
         [SerializeField] private int _channels = 1; // Mono:1, Stereo:2
-        [SerializeField] private int _samplingFrequency = 48000; // 48[kHz]
+        [SerializeField] private int _samplingFrequency = 48000; // [kHz]
         
         private AudioSource _audioSource;
         private int _audioClipSamples;
@@ -31,8 +31,14 @@ namespace UtilityToolkit.Audio
             _audioSource.Stop();
         }
         
-        public void StartOutput()
+        public void StartOutput(int channels = 1, int samplingFrequency = 48000)
         {
+            if (channels != _channels || samplingFrequency != _samplingFrequency)
+            {
+                _channels = channels;
+                _samplingFrequency = samplingFrequency;
+                _audioSource.clip = AudioClip.Create("UnityAudioOutput", _audioClipSamples, (int)_channels, (int)_samplingFrequency, false);
+            }
             _audioSource.Play();
         }
         
@@ -44,7 +50,7 @@ namespace UtilityToolkit.Audio
         public void PushAudioFrame(float[] pcm)
         {
             _audioSource.clip.SetData(pcm, _headPosition);
-            _headPosition += pcm.Length;
+            _headPosition += pcm.Length / _channels;
             _headPosition %= _audioClipSamples;
         }
     }
