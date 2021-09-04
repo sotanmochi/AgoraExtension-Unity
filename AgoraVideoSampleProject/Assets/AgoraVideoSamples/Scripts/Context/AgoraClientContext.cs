@@ -63,7 +63,7 @@ namespace AgoraExtension.Samples
 
         public void SendAudioFrame(float[] frameData)
         {
-            _Client.PushAudioFrame(frameData);
+            _Client.PushAudioFrame(frameData, _JoinParameters.AudioChannels, _JoinParameters.SampleRate);
         }
     }
 }

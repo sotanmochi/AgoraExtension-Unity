@@ -89,6 +89,7 @@ namespace AgoraExtension
 
             // Audio
             _RtcEngine.SetExternalAudioSource(true, joinParameters.SampleRate, joinParameters.AudioChannels);
+            _RtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO, AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_SHOWROOM);
             // _RtcEngine.DisableAudio();
             // _RtcEngine.MuteLocalAudioStream(true);
             // _RtcEngine.EnableLocalAudio(false);
