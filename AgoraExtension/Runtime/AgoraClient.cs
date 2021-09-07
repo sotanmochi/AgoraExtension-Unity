@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UniRx;
@@ -34,6 +35,7 @@ namespace AgoraExtension
         private bool _IsJoined;
 
         private IRtcEngine _RtcEngine;
+        private IVideoDeviceManager _VideoDeviceManager;
 
         void OnDestroy()
         {
@@ -52,6 +54,8 @@ namespace AgoraExtension
             {
                 return _IsInitialized = false;
             }
+
+            _VideoDeviceManager = _RtcEngine.GetVideoDeviceManager();
 
             _RtcEngine.OnJoinChannelSuccess += OnJoinChannelSuccess;
             _RtcEngine.OnUserJoined += OnUserJoined;
@@ -106,10 +110,12 @@ namespace AgoraExtension
                 frameRate = joinParameters.FrameRate,
             };
             _RtcEngine.SetVideoEncoderConfiguration(config);
-            _RtcEngine.SetExternalVideoSource(true);
+
+            _RtcEngine.SetExternalVideoSource(joinParameters.UseExternalVideoSource);
 
             _RtcEngine.EnableVideoObserver();
             _RtcEngine.EnableVideo();
+            _VideoDeviceManager.CreateAVideoDeviceManager();
 
             // Join channel
             _RtcEngine.JoinChannel(joinParameters.ChannelName);
@@ -130,6 +136,44 @@ namespace AgoraExtension
             _RtcEngine.LeaveChannel();
             _RtcEngine.DisableVideo();
             _RtcEngine.DisableVideoObserver();
+            _VideoDeviceManager.ReleaseAVideoDeviceManager();
+        }
+
+        public string GetCurrentVideoDevice()
+        {
+            string deviceID = "Unknown";
+            _VideoDeviceManager.GetCurrentVideoDevice(ref deviceID);
+            return deviceID;
+        }
+
+        public List<Device> GetVideoDevices()
+        {
+            List<Device> devices = new List<Device>();
+
+            int count = _VideoDeviceManager.GetVideoDeviceCount();
+            for (int i = 0; i < count; i++)
+            {
+                var device = new Device(){ Index = i };
+                _VideoDeviceManager.GetVideoDevice(i, ref device.Name, ref device.ID);
+                devices.Add(device);
+            }
+
+            return devices;
+        }
+
+        public void SetVideoDevice(string deviceId)
+        {
+            _VideoDeviceManager.SetVideoDevice(deviceId);
+        }
+
+        public void EnableVideo()
+        {
+            _RtcEngine.EnableVideo();
+        }
+
+        public void DisableVideo()
+        {
+            _RtcEngine.DisableVideo();
         }
 
         public void PushVideoFrame(ExternalVideoFrame externalVideoFrame)

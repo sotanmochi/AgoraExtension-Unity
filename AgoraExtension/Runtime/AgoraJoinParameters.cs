@@ -8,6 +8,7 @@ namespace AgoraExtension
     public class AgoraJoinParameters : ScriptableObject
     {
         public string ChannelName = "ChannelName";
+        public bool UseExternalVideoSource = false;
         public int VideoWidth = 640;
         public int VideoHeight = 360;
         public FRAME_RATE FrameRate = FRAME_RATE.FRAME_RATE_FPS_15;
