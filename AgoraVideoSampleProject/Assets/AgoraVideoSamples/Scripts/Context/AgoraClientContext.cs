@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UniRx;
 using Cysharp.Threading.Tasks;
@@ -21,6 +23,8 @@ namespace AgoraExtension.Samples
 
         public int VideoWidth => _JoinParameters.VideoWidth;
         public int VideoHeight => _JoinParameters.VideoHeight;
+
+        private List<Device> _videoDeviceList;
 
         void Awake()
         {
@@ -55,10 +59,36 @@ namespace AgoraExtension.Samples
             _Client.Leave();
         }
 
+        public List<string> GetVideoDevices()
+        {
+            _videoDeviceList = _Client.GetVideoDevices();
+            return _videoDeviceList.Select(device => device.Name).ToList();
+        }
+
+        public void SetVideoDevice(int index)
+        {
+            _Client.SetVideoDevice(_videoDeviceList[index].ID);
+        }
+
+        public void SetExternalVideoSource(bool useExternalVideoSource)
+        {
+            _JoinParameters.UseExternalVideoSource = useExternalVideoSource;
+        }
+
         public void SetVideoResolution(int width, int height)
         {
             _JoinParameters.VideoWidth = width;
             _JoinParameters.VideoHeight = height;
+        }
+
+        public void EnableVideo()
+        {
+            _Client.EnableVideo();
+        }
+
+        public void DisableVideo()
+        {
+            _Client.DisableVideo();
         }
 
         public void SendAudioFrame(float[] frameData)

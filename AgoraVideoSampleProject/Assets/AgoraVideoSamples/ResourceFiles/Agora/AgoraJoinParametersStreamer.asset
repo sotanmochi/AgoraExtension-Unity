@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07dd1638235d6b64ea886e28e74064bb, type: 3}
-  m_Name: AgoraJoinParameters
+  m_Name: AgoraJoinParametersStreamer
   m_EditorClassIdentifier: 
   ChannelName: TEST
   VideoWidth: 1920
   VideoHeight: 960
   FrameRate: 30
-  ClientRoleType: 2
-  ChannelProfile: 0
+  ClientRoleType: 1
+  ChannelProfile: 1
   AudioChannels: 2
   SampleRate: 48000

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
@@ -7,16 +9,17 @@ namespace AgoraExtension.Samples
 {
     public class WebCamSelectView : MonoBehaviour
     {
-        [SerializeField] Dropdown _WebCamSelectDropdown;
+        [SerializeField] Dropdown _selectDropdown;
 
-        public IObservable<WebCamDevice> OnSelectedWebCamAsObservable() => _OnSelectedWebCamSubject;
-        private Subject<WebCamDevice> _OnSelectedWebCamSubject = new Subject<WebCamDevice>();
+        public IObservable<(int Index, string Name)> OnSelectedWebCamAsObservable() => _OnSelectedWebCamSubject;
+        private Subject<(int Index, string Name)> _OnSelectedWebCamSubject = new Subject<(int Index, string Name)>();
+
+        private string[] _dropdownItems;
+        private string _dropdownMessage = "Select camera";
 
         void Awake()
         {
-            InitializeWebCamSelectDropdown();
-
-            _WebCamSelectDropdown.OnValueChangedAsObservable()
+            _selectDropdown.OnValueChangedAsObservable()
             .Subscribe(selectedIndex => 
             {
                 if (selectedIndex < 1)
@@ -24,23 +27,26 @@ namespace AgoraExtension.Samples
                     return;
                 }
 
-                _OnSelectedWebCamSubject.OnNext(WebCamTexture.devices[selectedIndex - 1]);
+                int index = selectedIndex - 1;
+                _OnSelectedWebCamSubject.OnNext((index, _dropdownItems[index]));
             })
             .AddTo(this);
         }
-
-        private void InitializeWebCamSelectDropdown()
+        
+        public void UpdateSelectDropdown(List<string> itemList)
         {
-            _WebCamSelectDropdown.ClearOptions();
-            _WebCamSelectDropdown.RefreshShownValue();
-            _WebCamSelectDropdown.options.Add(new Dropdown.OptionData { text = "Select camera" });
+            _dropdownItems = itemList.ToArray();
 
-            foreach(var device in WebCamTexture.devices)
+            _selectDropdown.ClearOptions();
+            _selectDropdown.RefreshShownValue();
+            _selectDropdown.options.Add(new Dropdown.OptionData { text = _dropdownMessage });
+            
+            foreach(var item in itemList)
             {
-                _WebCamSelectDropdown.options.Add(new Dropdown.OptionData { text = device.name });
+                _selectDropdown.options.Add(new Dropdown.OptionData { text = item });
             }
-
-            _WebCamSelectDropdown.RefreshShownValue();
+            
+            _selectDropdown.RefreshShownValue();
         }
     }
 }
