@@ -4,14 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
 using UniRx;
 using Cysharp.Threading.Tasks;
 using agora_gaming_rtc;
 
 namespace AgoraExtension
 {
-    public class AgoraClient : MonoBehaviour
+    public class AgoraClient : IDisposable
     {
         public IObservable<Unit> OnInitializeAsObservable() => _OnInitialized;
         private Subject<Unit> _OnInitialized = new Subject<Unit>();
@@ -37,9 +36,26 @@ namespace AgoraExtension
         private IRtcEngine _RtcEngine;
         private IVideoDeviceManager _VideoDeviceManager;
 
-        void OnDestroy()
+        public AgoraClient()
         {
-            Uninitialize();
+            UnityEngine.Application.quitting += Dispose;
+        }
+
+        public void Dispose()
+        {
+            Leave();
+
+            _IsInitialized = false;
+
+            if (_RtcEngine != null)
+            {
+                _RtcEngine.OnJoinChannelSuccess -= OnJoinChannelSuccess;
+                _RtcEngine.OnUserJoined -= OnUserJoined;
+                _RtcEngine.OnUserOffline -= OnUserOffline;
+                _RtcEngine.OnLeaveChannel -= OnLeaveChannel;
+            }
+ 
+            UnloadEngine();
         }
 
         public async UniTask<bool> Initialize(AgoraConfig config)
@@ -64,21 +80,6 @@ namespace AgoraExtension
 
             _OnInitialized.OnNext(Unit.Default);
             return _IsInitialized = true;
-        }
-
-        public void Uninitialize()
-        {
-            _IsInitialized = false;
-
-            if (_RtcEngine != null)
-            {
-                _RtcEngine.OnJoinChannelSuccess -= OnJoinChannelSuccess;
-                _RtcEngine.OnUserJoined -= OnUserJoined;
-                _RtcEngine.OnUserOffline -= OnUserOffline;
-                _RtcEngine.OnLeaveChannel -= OnLeaveChannel;
-            }
- 
-            UnloadEngine();
         }
 
         public async UniTask<bool> Join(AgoraJoinParameters joinParameters, int timeoutSeconds = 30)

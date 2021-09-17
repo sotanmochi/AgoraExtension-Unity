@@ -11,7 +11,6 @@ namespace AgoraExtension.Samples
     {
         [SerializeField] AgoraConfig _Config;
         [SerializeField] AgoraJoinParameters _JoinParameters;
-        [SerializeField] AgoraClient _Client;
 
         public bool IsJoined => _Client.IsJoined;
 
@@ -24,10 +23,13 @@ namespace AgoraExtension.Samples
         public int VideoWidth => _JoinParameters.VideoWidth;
         public int VideoHeight => _JoinParameters.VideoHeight;
 
+        private AgoraClient _Client;
         private List<Device> _videoDeviceList;
 
         void Awake()
         {
+            _Client = new AgoraClient();
+
             _Client.OnUserJoinedAsObservable()
             .Subscribe(userId => 
             {
