@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07dd1638235d6b64ea886e28e74064bb, type: 3}
   m_Name: AgoraJoinParameters
   m_EditorClassIdentifier: 
+  ChannelProfile: 1
+  ClientRoleType: 2
+  FrameRate: 30
   ChannelName: TEST
+  UseExternalVideoSource: 0
   VideoWidth: 1920
   VideoHeight: 960
-  FrameRate: 30
-  ClientRoleType: 2
-  ChannelProfile: 0
+  UseExternalAudioSource: 1
+  UseExternalAudioSink: 0
   AudioChannels: 2
   SampleRate: 48000
