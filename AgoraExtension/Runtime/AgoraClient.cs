@@ -93,12 +93,10 @@ namespace AgoraExtension
             _RtcEngine.SetClientRole(joinParameters.ClientRoleType);
 
             // Audio
-            _RtcEngine.SetExternalAudioSource(true, joinParameters.SampleRate, joinParameters.AudioChannels);
             _RtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO, AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_SHOWROOM);
-            // _RtcEngine.DisableAudio();
-            // _RtcEngine.MuteLocalAudioStream(true);
-            // _RtcEngine.EnableLocalAudio(false);
             _RtcEngine.SetEnableSpeakerphone(true);
+            _RtcEngine.SetExternalAudioSource(joinParameters.UseExternalAudioSource, joinParameters.SampleRate, joinParameters.AudioChannels);
+            _RtcEngine.SetExternalAudioSink(joinParameters.UseExternalAudioSink, joinParameters.SampleRate, joinParameters.AudioChannels);
 
             // Video
             var config = new VideoEncoderConfiguration()
@@ -135,6 +133,7 @@ namespace AgoraExtension
             }
 
             _RtcEngine.LeaveChannel();
+            _RtcEngine.DisableAudio();
             _RtcEngine.DisableVideo();
             _RtcEngine.DisableVideoObserver();
             _VideoDeviceManager.ReleaseAVideoDeviceManager();
@@ -180,11 +179,6 @@ namespace AgoraExtension
         public void PushVideoFrame(ExternalVideoFrame externalVideoFrame)
         {
             _RtcEngine.PushVideoFrame(externalVideoFrame);            
-        }
-
-        public void PushAudioFrame(AudioFrame audioFrame)
-        {
-            _RtcEngine.PushAudioFrame(audioFrame);
         }
 
         private static readonly DateTime Jan1st1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
