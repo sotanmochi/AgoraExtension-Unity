@@ -3,11 +3,12 @@
     "references": [
         "AgoraEngine",
         "UniRx",
-        "UniTask"
+        "UniTask",
+        "AudioUtilityToolkit"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
-    "allowUnsafeCode": false,
+    "allowUnsafeCode": true,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
