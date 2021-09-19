@@ -20,6 +20,6 @@ MonoBehaviour:
   VideoWidth: 1920
   VideoHeight: 960
   UseExternalAudioSource: 1
-  UseExternalAudioSink: 0
+  UseExternalAudioSink: 1
   AudioChannels: 2
   SampleRate: 48000

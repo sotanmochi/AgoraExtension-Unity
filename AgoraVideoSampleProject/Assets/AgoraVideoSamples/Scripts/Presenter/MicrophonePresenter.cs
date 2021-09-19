@@ -17,11 +17,6 @@ namespace AgoraExtension.Samples
         
         private void Awake()
         {
-            _microphone = new UnityMicrophone();
-
-            // var inputDeviceList = UnityEngine.Microphone.devices.ToList();
-            // _microphoneControlView.UpdateSelectDropdown(inputDeviceList);
-
             var inputDeviceList = AudioDeviceDriver.InputDeviceList.Select(device => device.DeviceName).ToList();
             _microphoneControlView.UpdateSelectDropdown(inputDeviceList);
 
@@ -29,12 +24,12 @@ namespace AgoraExtension.Samples
             .SkipLatestValueOnSubscribe()
             .Subscribe(device => 
             {
-                // _microphone.Stop();
-                // _microphone.Start(device);
+                if (_inputStream != null) _inputStream.OnProcessFrame -= OnProcessFrame;
 
                 _inputStream = AudioDeviceDriver.GetInputDevice(device);
-                _inputStream.OnProcessFrame += OnProcessFrame;                _loopbackAudioOut.StartOutput(_inputStream.ChannelCount, _inputStream.SampleRate);
                 _loopbackAudioOut.StartOutput(_inputStream.ChannelCount, _inputStream.SampleRate);
+
+                _inputStream.OnProcessFrame += OnProcessFrame;
             })
             .AddTo(this);
             
@@ -44,7 +39,7 @@ namespace AgoraExtension.Samples
             {
                 if (loopback)
                 {
-                    _loopbackAudioOut.StartOutput();
+                    _loopbackAudioOut.StartOutput(_inputStream.ChannelCount, _inputStream.SampleRate);
                 }
                 else
                 {
@@ -52,16 +47,11 @@ namespace AgoraExtension.Samples
                 }
             })
             .AddTo(this);
-
-            _microphone.OnProcessFrame += OnProcessFrame;
         }
         
         private void OnDestroy()
         {
-            // _microphone.OnProcessFrame -= OnProcessFrame;
-            // _microphone.Dispose();
             _inputStream.OnProcessFrame -= OnProcessFrame;
-            _inputStream.Dispose();
         }
         
         private void OnProcessFrame(float[] data)

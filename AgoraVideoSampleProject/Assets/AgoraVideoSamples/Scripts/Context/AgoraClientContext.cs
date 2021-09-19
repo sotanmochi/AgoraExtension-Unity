@@ -23,6 +23,10 @@ namespace AgoraExtension.Samples
         public int VideoWidth => _JoinParameters.VideoWidth;
         public int VideoHeight => _JoinParameters.VideoHeight;
 
+        public bool ExternalAudioSink => _JoinParameters.UseExternalAudioSink;
+        public int SampleRate => _JoinParameters.SampleRate;
+        public int ChannelCount => _JoinParameters.AudioChannels;
+
         private AgoraClient _Client;
         private List<Device> _videoDeviceList;
 
