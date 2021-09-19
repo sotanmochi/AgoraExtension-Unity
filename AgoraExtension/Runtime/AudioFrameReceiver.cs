@@ -14,7 +14,7 @@ namespace AgoraExtension
 {
     public class AudioFrameReceiver : IDisposable
     {
-        public IObservable<float[]> OnProcessFrame => _processFrameSubject;
+        public IObservable<float[]> OnProcessFrameAsObservable() => _processFrameSubject;
         private Subject<float[]> _processFrameSubject = new Subject<float[]>();
 
         private readonly int _frameDurationMs = 20; // 20[ms]
