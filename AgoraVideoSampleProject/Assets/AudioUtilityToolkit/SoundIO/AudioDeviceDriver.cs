@@ -97,12 +97,7 @@ namespace AudioUtilityToolkit.SoundIOExtension
                 InsertPlayerLoopSystem();
 
                 // Install the "on-exit" callback.
-            #if UNITY_EDITOR
-                UnityEditor.AssemblyReloadEvents.beforeAssemblyReload += OnExit;
-                UnityEditor.EditorApplication.quitting += OnExit;
-            #else
                 UnityEngine.Application.quitting += OnExit;
-            #endif
             }
 
             return _context;
@@ -110,8 +105,10 @@ namespace AudioUtilityToolkit.SoundIOExtension
 
         static void OnExit()
         {
-            foreach (var s in _inputStreams) s.Dispose();
-            _inputStreams = null;
+            foreach (var stream in _inputStreams)
+            {
+                stream.Dispose();
+            }
 
             _context?.Dispose();
             _context = null;
