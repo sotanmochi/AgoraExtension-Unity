@@ -139,7 +139,7 @@ namespace AgoraExtension
                     // Convert 16bit PCM data bytes to 32bit float PCM data.
                     for (var i = 0; i < pcmBuffer.Length; i++)
                     {
-                        pcmBuffer[i] = ConvertBytesToInt16(span.Slice(2 * i)) / 32767f; // Int16.MaxValue is 32767;
+                        pcmBuffer[i] = ConvertBytesToInt16(span.Slice(2 * i)) / 32768f; // The maximum absolute value of Int16 is 32768.
                     }
 
                     lock (_ringBuffer)
