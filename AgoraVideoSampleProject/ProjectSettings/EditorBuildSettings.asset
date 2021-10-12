@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/AgoraVideoSamples/Scenes/VideoStreamer.unity
+    path: Assets/AgoraVideoSamples/BasicBroadcasting/Scenes/VideoStreamer.unity
     guid: b78a0e67817b49748ac15ea8ca7fe8dd
   - enabled: 1
-    path: Assets/AgoraVideoSamples/Scenes/VideoReceiver.unity
+    path: Assets/AgoraVideoSamples/BasicBroadcasting/Scenes/VideoReceiver.unity
     guid: f85ee923303caf74fb657be8a41a29f3
   m_configObjects: {}
