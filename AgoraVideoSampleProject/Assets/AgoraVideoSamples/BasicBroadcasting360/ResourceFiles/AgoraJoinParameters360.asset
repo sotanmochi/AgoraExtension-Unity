@@ -16,7 +16,7 @@ MonoBehaviour:
   ClientRoleType: 2
   FrameRate: 30
   ChannelName: TEST
-  UseExternalVideoSource: 1
+  UseExternalVideoSource: 0
   VideoWidth: 2560
   VideoHeight: 1280
   UseExternalAudioSource: 1
