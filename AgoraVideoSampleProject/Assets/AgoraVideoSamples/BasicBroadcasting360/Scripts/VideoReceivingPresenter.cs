@@ -17,6 +17,7 @@ namespace AgoraExtension.Samples.BasicBroadcasting360
             .Subscribe(texture => 
             {
                 _material.mainTexture = texture;
+                _controlView.UpdateResolutionText(texture.width, texture.height);
             })
             .AddTo(this);
 

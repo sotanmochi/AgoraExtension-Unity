@@ -12,6 +12,7 @@ namespace AgoraExtension.Samples
         [SerializeField] Dropdown _RemoteUserList;
         [SerializeField] Button _StartReceiving;
         [SerializeField] Button _StopReceiving;
+        [SerializeField] Text _resolutionText;
 
         public uint SenderId => _SenderId;
         private uint _SenderId;
@@ -66,6 +67,11 @@ namespace AgoraExtension.Samples
             }
 
             _RemoteUserList.value = list.Count;
+        }
+
+        public void UpdateResolutionText(int width, int height)
+        {
+            _resolutionText.text = $"{width}x{height}";
         }
     }
 }
