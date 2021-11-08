@@ -17,8 +17,8 @@ MonoBehaviour:
   FrameRate: 30
   ChannelName: TEST
   UseExternalVideoSource: 0
-  VideoWidth: 2560
-  VideoHeight: 1280
+  VideoWidth: 1920
+  VideoHeight: 960
   UseExternalAudioSource: 1
   UseExternalAudioSink: 1
   AudioChannels: 2
