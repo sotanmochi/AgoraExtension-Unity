@@ -12,9 +12,16 @@ namespace AgoraExtension.Samples
         void Awake()
         {
             _ConnectionView.OnTriggeredJoinEventAsObservable()
-            .Subscribe(channelId => UniTask.Void(async () =>  
+            .Subscribe(value => UniTask.Void(async () =>  
             {
-                await _Context.Join(channelId);
+                if (uint.TryParse(value.UserId, out var uid))
+                {
+                    await _Context.Join(value.ChannelId, uid);
+                }
+                else
+                {
+                    await _Context.Join(value.ChannelId);
+                }
             }))
             .AddTo(this);
 

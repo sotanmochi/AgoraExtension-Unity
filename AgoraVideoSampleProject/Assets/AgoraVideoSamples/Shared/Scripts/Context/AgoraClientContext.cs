@@ -49,7 +49,7 @@ namespace AgoraExtension.Samples
             .AddTo(this);
         }
 
-        public async UniTask<bool> Join(string channelName)
+        public async UniTask<bool> Join(string channelName, uint userId = 0)
         {
             if (!_Client.IsInitialized)
             {
@@ -57,6 +57,7 @@ namespace AgoraExtension.Samples
             }
 
             _JoinParameters.ChannelName = channelName;
+            _JoinParameters.UserId = userId;
             return await _Client.Join(_JoinParameters);
         }
 

@@ -11,6 +11,7 @@ namespace AgoraExtension
         public CLIENT_ROLE_TYPE ClientRoleType = CLIENT_ROLE_TYPE.CLIENT_ROLE_AUDIENCE;
         public FRAME_RATE FrameRate = FRAME_RATE.FRAME_RATE_FPS_15;
         public string ChannelName = "ChannelName";
+        public uint UserId = 0;
         public bool UseExternalVideoSource = false;
         public int VideoWidth = 640;
         public int VideoHeight = 360;

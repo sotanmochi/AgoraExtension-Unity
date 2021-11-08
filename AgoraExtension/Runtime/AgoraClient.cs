@@ -117,7 +117,7 @@ namespace AgoraExtension
             _VideoDeviceManager.CreateAVideoDeviceManager();
 
             // Join channel
-            _RtcEngine.JoinChannel(joinParameters.ChannelName);
+            _RtcEngine.JoinChannel(joinParameters.ChannelName, "", joinParameters.UserId);
             await UniTask.WaitUntil(() => _IsJoined).TimeoutWithoutException(TimeSpan.FromSeconds(timeoutSeconds));
 
             return _IsJoined;
