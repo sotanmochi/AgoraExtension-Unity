@@ -15,7 +15,8 @@ MonoBehaviour:
   ChannelProfile: 1
   ClientRoleType: 2
   FrameRate: 30
-  ChannelName: TEST
+  ChannelName: StreamingTest
+  UserId: 0
   UseExternalVideoSource: 0
   VideoWidth: 1920
   VideoHeight: 960
