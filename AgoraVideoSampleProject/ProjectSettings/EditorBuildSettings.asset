@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/AgoraVideoSamples/BasicBroadcasting/Scenes/VideoReceiver.unity
     guid: f85ee923303caf74fb657be8a41a29f3
-  - enabled: 1
+  - enabled: 0
     path: Assets/AgoraVideoSamples/HeadlessReceiver/Scenes/HeadlessReceiver.unity
     guid: c09612f14a744854cac97eddf8c8b085
+  - enabled: 1
+    path: Assets/AgoraVideoSamples/BasicBroadcasting360/Scenes/VideoStreamer360.unity
+    guid: 6256b2fc68a292b40886593121bdcde6
   m_configObjects: {}
