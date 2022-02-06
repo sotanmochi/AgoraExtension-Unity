@@ -1,10 +1,12 @@
 {
     "name": "AgoraExtension",
+    "rootNamespace": "",
     "references": [
         "AgoraEngine",
         "UniRx",
         "UniTask",
-        "AudioUtilityToolkit"
+        "AudioUtilityToolkit",
+        "UnityCustomTextureRenderer"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
