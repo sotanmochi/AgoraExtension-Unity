@@ -93,6 +93,20 @@
       "source": "local",
       "dependencies": {}
     },
+    "jp.sotanmochi.unitycustomtexturerenderer": {
+      "version": "https://github.com/sotanmochi/UnityCustomTextureRenderer.git?path=Assets/CustomTextureRenderer",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "756f44fdb54dfe8e345eeaaf19aa765d19dd622b"
+    },
+    "jp.sotanmochi.unitycustomtexturerenderer.samples": {
+      "version": "https://github.com/sotanmochi/UnityCustomTextureRenderer.git?path=Assets/CustomTextureRenderer.Samples",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "756f44fdb54dfe8e345eeaaf19aa765d19dd622b"
+    },
     "org.nuget.system.buffers": {
       "version": "4.4.0",
       "depth": 1,

@@ -26,6 +26,8 @@
     "com.unity.ugui": "1.0.0",
     "jp.keijiro.libsoundio": "1.0.3",
     "jp.sotanmochi.agora-extension": "file:../../AgoraExtension",
+    "jp.sotanmochi.unitycustomtexturerenderer": "https://github.com/sotanmochi/UnityCustomTextureRenderer.git?path=Assets/CustomTextureRenderer",
+    "jp.sotanmochi.unitycustomtexturerenderer.samples": "https://github.com/sotanmochi/UnityCustomTextureRenderer.git?path=Assets/CustomTextureRenderer.Samples",
     "org.nuget.system.memory": "4.5.3",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",

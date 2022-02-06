@@ -78,8 +78,8 @@ namespace AgoraExtension
         /// <param name="data"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        /// <param name="frameCount"></param>
-        private void UpdateRawTextureDataFunction(IntPtr data, int width, int height, uint frameCount)
+        /// <param name="bytesPerPixel"></param>
+        private void UpdateRawTextureDataFunction(IntPtr data, int width, int height, int bytesPerPixel)
         {
             _videoRender.UpdateVideoRawData(_senderId, data, ref width, ref height);
         }
