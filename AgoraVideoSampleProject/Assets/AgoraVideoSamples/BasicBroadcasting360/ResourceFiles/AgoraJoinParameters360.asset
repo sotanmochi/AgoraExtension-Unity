@@ -18,8 +18,8 @@ MonoBehaviour:
   ChannelName: StreamingTest
   UserId: 0
   UseExternalVideoSource: 0
-  VideoWidth: 1920
-  VideoHeight: 960
+  VideoWidth: 3840
+  VideoHeight: 1920
   UseExternalAudioSource: 1
   UseExternalAudioSink: 1
   AudioChannels: 2

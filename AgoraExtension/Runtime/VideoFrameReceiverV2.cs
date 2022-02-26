@@ -19,7 +19,7 @@ namespace AgoraExtension
         private VideoRender _videoRender;
 
         private Texture2D _nativeTexture;
-        private CustomTextureRenderer _customTextureRenderer;
+        private PluginTextureRenderer _customTextureRenderer;
 
         public VideoFrameReceiverV2(bool autoDispose = true)
         {
@@ -43,12 +43,14 @@ namespace AgoraExtension
             _nativeTexture = new Texture2D(frameWidth, frameHeight, TextureFormat.RGBA32, false);
             OnUpdateTexture?.Invoke(_nativeTexture);
 
-            _customTextureRenderer = new CustomTextureRenderer(UpdateRawTextureDataFunction, _nativeTexture);
+            _customTextureRenderer = 
+                new PluginTextureRenderer(
+                    UpdateRawTextureDataFunction, 
+                    targetTexture: _nativeTexture, 
+                    autoDispose: false
+                );
 
-            _disposable = Observable.EveryUpdate().Subscribe(_ => 
-            {
-                _customTextureRenderer.Update();
-            });
+            CustomTextureRenderSystem.Instance.AddRenderer(_customTextureRenderer);
         }
 
         public void Stop()

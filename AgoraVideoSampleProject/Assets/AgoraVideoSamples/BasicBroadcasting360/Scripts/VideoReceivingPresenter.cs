@@ -11,27 +11,39 @@ namespace AgoraExtension.Samples.BasicBroadcasting360
         [SerializeField] AgoraClientContext _clientContext;
         [SerializeField] VideoFrameReceiver _videoFrameReceiver;
 
+        VideoFrameReceiverV2 _frameReceiver = new VideoFrameReceiverV2();
+
         void Awake()
         {
-            _videoFrameReceiver.OnReceivedVideoFrame()
-            .Subscribe(texture => 
+        //     _videoFrameReceiver.OnReceivedVideoFrame()
+        //     .Subscribe(texture => 
+        //     {
+        //         _material.mainTexture = texture;
+        //         _controlView.UpdateResolutionText(texture.width, texture.height);
+        //     })
+        //     .AddTo(this);
+
+            _frameReceiver.OnUpdateTexture += (texture) =>
             {
                 _material.mainTexture = texture;
                 _controlView.UpdateResolutionText(texture.width, texture.height);
-            })
-            .AddTo(this);
+            };
 
             _controlView.OnTriggeredStartReceivingAsObservable()
             .Subscribe(_ =>
             {
-                _videoFrameReceiver.StartReceiving(_controlView.SenderId, _clientContext.VideoWidth, _clientContext.VideoHeight);
+                Debug.Log("Start");
+                // _videoFrameReceiver.StartReceiving(_controlView.SenderId, _clientContext.VideoWidth, _clientContext.VideoHeight);
+                _frameReceiver.Start(_controlView.SenderId, _clientContext.VideoWidth, _clientContext.VideoHeight);
             })
             .AddTo(this);
 
             _controlView.OnTriggeredStopReceivingAsObservable()
             .Subscribe(_ =>
             {
-                _videoFrameReceiver.StopReceiving();
+                Debug.Log("Stop");
+                // _videoFrameReceiver.StopReceiving();
+                _frameReceiver.Stop();
             })
             .AddTo(this);
 
