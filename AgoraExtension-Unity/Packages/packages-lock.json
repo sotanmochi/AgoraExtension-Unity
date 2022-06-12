@@ -120,6 +120,12 @@
       "dependencies": {},
       "url": "https://registry.npmjs.com"
     },
+    "jp.sotanmochi.agora-extension": {
+      "version": "file:AgoraExtension",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "jp.sotanmochi.audioutilitytoolkit": {
       "version": "https://github.com/sotanmochi/AudioUtilityToolkit-Unity.git?path=AudioUtilityToolkit-Unity/Assets/AudioUtilityToolkit",
       "depth": 0,

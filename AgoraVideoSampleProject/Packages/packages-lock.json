@@ -87,12 +87,6 @@
       "dependencies": {},
       "url": "https://registry.npmjs.com"
     },
-    "jp.sotanmochi.agora-extension": {
-      "version": "file:../../AgoraExtension",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {}
-    },
     "jp.sotanmochi.unitycustomtexturerenderer": {
       "version": "https://github.com/sotanmochi/UnityCustomTextureRenderer.git?path=Assets/CustomTextureRenderer#v1.3.4",
       "depth": 0,
