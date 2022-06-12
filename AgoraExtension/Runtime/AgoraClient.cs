@@ -93,6 +93,8 @@ namespace AgoraExtension
             _RtcEngine.SetClientRole(joinParameters.ClientRoleType);
 
             // Audio
+            _RtcEngine.EnableAudio();
+            _RtcEngine.EnableLocalAudio(false);
             _RtcEngine.SetAudioProfile(AUDIO_PROFILE_TYPE.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO, AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_SHOWROOM);
             _RtcEngine.SetEnableSpeakerphone(true);
             _RtcEngine.SetExternalAudioSource(joinParameters.UseExternalAudioSource, joinParameters.SampleRate, joinParameters.AudioChannels);

@@ -4,9 +4,9 @@
 - Unity 2020.3.20f1
 
 ## Dependencies
-- [Agora Video SDK for Unity v3.3.1.72 (May 13, 2021)](https://assetstore.unity.com/packages/tools/video/agora-video-sdk-for-unity-134502)
+- [Agora Video SDK for Unity v3.7.0 (April, 2022)](https://assetstore.unity.com/packages/tools/video/agora-video-sdk-for-unity-134502)
 
-- [UnityCustomTextureRenderer](https://github.com/sotanmochi/UnityCustomTextureRenderer)
+- [UnityCustomTextureRenderer v1.3.4](https://github.com/sotanmochi/UnityCustomTextureRenderer/releases/tag/v1.3.4)
 
 ## Third party assets
 - [UniRx Ver.7.1.0](https://github.com/neuecc/UniRx/releases/tag/7.1.0)  

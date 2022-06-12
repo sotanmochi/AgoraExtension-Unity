@@ -13,13 +13,10 @@ namespace AgoraExtension
     {
         public event Action<Texture> OnUpdateTexture;
 
-        private IDisposable _disposable;
-
         private uint _senderId;
         private VideoRender _videoRender;
 
-        private Texture2D _nativeTexture;
-        private PluginTextureRenderer _customTextureRenderer;
+        private PluginTextureRenderer _pluginTextureRenderer;
 
         public VideoFrameReceiverV2(bool autoDispose = true)
         {
@@ -40,32 +37,16 @@ namespace AgoraExtension
                 _videoRender.AddUserVideoInfo(_senderId, 0);
             }
 
-            _nativeTexture = new Texture2D(frameWidth, frameHeight, TextureFormat.RGBA32, false);
-            OnUpdateTexture?.Invoke(_nativeTexture);
+            _pluginTextureRenderer = new PluginTextureRenderer(UpdateRawTextureDataFunction, frameWidth, frameHeight);
+            OnUpdateTexture?.Invoke(_pluginTextureRenderer.TargetTexture);
 
-            _customTextureRenderer = 
-                new PluginTextureRenderer(
-                    UpdateRawTextureDataFunction, 
-                    targetTexture: _nativeTexture, 
-                    autoDispose: false
-                );
-
-            CustomTextureRenderSystem.Instance.AddRenderer(_customTextureRenderer);
+            CustomTextureRenderSystem.Instance.AddRenderer(_pluginTextureRenderer);
         }
 
         public void Stop()
         {
-            _disposable?.Dispose();
-            _disposable = null;
-
-            _customTextureRenderer?.Dispose();
-            _customTextureRenderer = null;
-
-            if (_nativeTexture != null)
-            {
-                UnityEngine.Object.Destroy(_nativeTexture);
-                _nativeTexture = null;
-            }
+            _pluginTextureRenderer?.Dispose();
+            _pluginTextureRenderer = null;
 
             if (_videoRender != null && IRtcEngine.QueryEngine() != null)
             {
