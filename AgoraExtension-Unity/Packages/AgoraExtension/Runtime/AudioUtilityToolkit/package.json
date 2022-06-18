@@ -1,0 +1,8 @@
+{
+    "name": "jp.sotanmochi.audioutilitytoolkit",
+    "version": "1.1.0",
+    "displayName": "Audio Utility Toolkit",
+    "description": "Audio Utility Toolkit for Unity",
+    "license": "CC0-1.0",
+    "unity": "2020.3"
+  }

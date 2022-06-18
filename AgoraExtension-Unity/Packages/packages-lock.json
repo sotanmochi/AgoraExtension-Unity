@@ -133,20 +133,6 @@
       "source": "embedded",
       "dependencies": {}
     },
-    "jp.sotanmochi.audioutilitytoolkit": {
-      "version": "https://github.com/sotanmochi/AudioUtilityToolkit-Unity.git?path=AudioUtilityToolkit-Unity/Assets/AudioUtilityToolkit",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "dc059f7493069b66596679f7747fcf057974956c"
-    },
-    "jp.sotanmochi.unitycustomtexturerenderer": {
-      "version": "https://github.com/sotanmochi/UnityCustomTextureRenderer.git?path=Assets/CustomTextureRenderer#v1.3.4",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "ad594048fa8aa4d443ee3da4ee34fe58677f761d"
-    },
     "org.nuget.system.buffers": {
       "version": "4.4.0",
       "depth": 1,
